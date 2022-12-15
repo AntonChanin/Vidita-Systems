@@ -25,7 +25,7 @@ type Props = {
 
 const DialogWindow: FC<Props>  = observer((props) => {
   const { open = false, onClose: handleClose, Transition } = props;
-  const { summaryVolium, summaryQty } = DocumetArchive;
+  const { selectCommodity, setSelectCommodity } = DocumetArchive;
 
   return (
     <Dialog
@@ -53,9 +53,14 @@ const DialogWindow: FC<Props>  = observer((props) => {
         </Toolbar>
       </AppBar>
       <List>
-        <ListItem button>
-          <ListItemText primary="Phone ringtone" secondary="Titania" />
-        </ListItem>
+        {selectCommodity.map(({ id: self, name, delivery_date }) => {
+          return (
+            <ListItem button>
+              <ListItemText primary={name} secondary={new Date(delivery_date).toLocaleDateString()} />
+            </ListItem>
+          );
+        })}
+       
         <Divider />
       </List>
     </Dialog>

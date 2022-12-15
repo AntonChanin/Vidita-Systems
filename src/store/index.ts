@@ -1,24 +1,25 @@
 import { action, makeObservable, observable } from 'mobx';
+import CommodityBilModel from '../model/document';
 
 class DocumentArchive {
-  summaryVolium = 0;
-  summaryQty = 0;
+  commodity: CommodityBilModel[] = [];
+  selectCommodity: CommodityBilModel[] = [];
 
   constructor() {
     makeObservable(this, {
-      summaryVolium: observable,
-      summaryQty: observable,
-      setSummaryVolium: action.bound,
-      setSummaryQty: action.bound,
+      commodity: observable,
+      selectCommodity: observable,
+      setCommodity: action.bound,
+      setSelectCommodity: action.bound,
     })
   }
 
-  setSummaryVolium(newSummaryVolium: number): void {
-    this.summaryVolium = newSummaryVolium;
+  setCommodity(newCommodity: CommodityBilModel[]) {
+    this.commodity = newCommodity;
   }
 
-  setSummaryQty(newSummaryQty: number): void {
-    this.summaryQty = newSummaryQty;
+  setSelectCommodity(newSelectCommodity: CommodityBilModel[]) {
+    this.selectCommodity = newSelectCommodity;
   }
 }
 
