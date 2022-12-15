@@ -4,9 +4,9 @@ import ThemeProvider from '@mui/styles/ThemeProvider';
 
 import CommodityBilModel from '../model/document';
 import UserTablePagination from './UserTablePagination';
-import { defaultMUITheme } from '../const/theme';
 import commodityBilPreset from '../const/commodityBilPreset';
 import { Close } from '../const/icons';
+import { defaultMUITheme } from '../const/theme';
 
 const rows: CommodityBilModel[] = [
   { id: '0', status: 'active', sum: 100, qty: 35, volume: 14, name: 'ham', delivery_date: new Date('10.10.2022').getTime(), currency: '' },
