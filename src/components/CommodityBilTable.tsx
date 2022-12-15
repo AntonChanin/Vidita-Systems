@@ -1,14 +1,13 @@
 import React, { FC, useLayoutEffect, useState } from 'react';
 import MaterialTable from 'material-table';
 import ThemeProvider from '@mui/styles/ThemeProvider';
-import { observer } from 'mobx-react-lite';
 
+import SelectCommodityObserver from './SelectCommodityObserver';
 import CommodityBilModel from '../model/document';
 import UserTablePagination from './UserTablePagination';
 import commodityBilPreset from '../const/commodityBilPreset';
 import { Close } from '../const/icons';
 import { defaultMUITheme } from '../const/theme';
-import DocumentArchive from '../store';
 
 const rows: CommodityBilModel[] = [
   { id: '0', status: 'active', sum: 100, qty: 35, volume: 14, name: 'ham', delivery_date: new Date('10.10.2022').getTime(), currency: '' },
@@ -22,16 +21,7 @@ const rows: CommodityBilModel[] = [
   { id: '8', status: 'active', sum: 90, qty: 65, volume: 12, name: 'orange juce', delivery_date: new Date('05.20.2022').getTime(), currency: '' },
 ];
 
-
-const SelectCommodityObserver: FC<{ commodity: CommodityBilModel[] }> = observer((props) => {
-  const { commodity } = props;
-  const { setSelectCommodity } = DocumentArchive;
-  setSelectCommodity(commodity);
-
-  return null;
-});
-
-const CommodityBilTable = () => {
+const CommodityBilTable: FC = () => {
   const [summaryVolium, setSummaryVolium] = useState(0);
   const [summaryQty, setSummaryQty] = useState(0);
   const [selectCommodity, setSelectCommodity] = useState<CommodityBilModel[]>([]);
