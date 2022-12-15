@@ -5,7 +5,7 @@ import ThemeProvider from '@mui/styles/ThemeProvider';
 import CommodityBilModel from '../model/document';
 import UserTablePagination from './UserTablePagination';
 import { defaultMUITheme } from '../const/theme';
-import commoditybilPreset from '../const/commoditybilPreset';
+import commodityBilPreset from '../const/commodityBilPreset';
 import { Close } from '../const/icons';
 
 const rows: CommodityBilModel[] = [
@@ -36,7 +36,7 @@ const CommodityBilTable = () => {
       <MaterialTable
         onSelectionChange={() => {}}
         data={rows}
-        {...commoditybilPreset}
+        {...commodityBilPreset}
         actions={[
           {
             tooltip: 'Remove All Selected Users',

@@ -1,7 +1,7 @@
 import { commodityBilStructure } from './structure';
 import icons from './icons';
 
-const commoditybilPreset = {
+const commodityBilPreset = {
   title: 'Commodity Bil',
   columns: commodityBilStructure,
   style: {
@@ -17,4 +17,4 @@ const commoditybilPreset = {
   icons,
 };
 
-export default commoditybilPreset;
+export default commodityBilPreset;
