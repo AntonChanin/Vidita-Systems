@@ -1,7 +1,8 @@
-import React, { useLayoutEffect, useState } from 'react';
+import React, { FC, useLayoutEffect, useState } from 'react';
 import MaterialTable from 'material-table';
 import ThemeProvider from '@mui/styles/ThemeProvider';
 
+import SelectCommodityObserver from './SelectCommodityObserver';
 import CommodityBilModel from '../model/document';
 import UserTablePagination from './UserTablePagination';
 import commodityBilPreset from '../const/commodityBilPreset';
@@ -20,9 +21,10 @@ const rows: CommodityBilModel[] = [
   { id: '8', status: 'active', sum: 90, qty: 65, volume: 12, name: 'orange juce', delivery_date: new Date('05.20.2022').getTime(), currency: '' },
 ];
 
-const CommodityBilTable = () => {
+const CommodityBilTable: FC = () => {
   const [summaryVolium, setSummaryVolium] = useState(0);
   const [summaryQty, setSummaryQty] = useState(0);
+  const [selectCommodity, setSelectCommodity] = useState<CommodityBilModel[]>([]);
 
   useLayoutEffect(() => {
     rows.forEach((row) => {
@@ -33,8 +35,9 @@ const CommodityBilTable = () => {
 
   return (
     <ThemeProvider theme={defaultMUITheme}>
+      <SelectCommodityObserver commodity={selectCommodity} />
       <MaterialTable
-        onSelectionChange={() => {}}
+        onSelectionChange={(data) => { setSelectCommodity(data); }}
         data={rows}
         {...commodityBilPreset}
         actions={[
