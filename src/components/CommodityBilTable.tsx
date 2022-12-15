@@ -5,7 +5,7 @@ import ThemeProvider from '@mui/styles/ThemeProvider';
 import CommodityBilModel from '../model/document';
 import UserTablePagination from './UserTablePagination';
 import { defaultMUITheme } from '../const/theme';
-import commoditybilPreset from '../const/CommoditybilPreset';
+import commoditybilPreset from '../const/commoditybilPreset';
 import { Close } from '../const/icons';
 
 const rows: CommodityBilModel[] = [
