@@ -1,10 +1,11 @@
 
-import React, { StrictMode } from 'react';
-import { Route, Router, Routes } from 'react-router-dom';
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 
+import Navigation from './components/Navigation';
+import Footer from './components/Footer';
 import ShoppingCheckpoint from './page/ShoppingCheckpoint';
 import './App.css'
-import Navigation from './components/Navigation';
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<ShoppingCheckpoint />} />
         </Routes>
+      <Footer/>
     </div>
   )
 }

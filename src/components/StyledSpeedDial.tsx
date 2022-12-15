@@ -3,10 +3,6 @@ import { SpeedDial } from '@mui/material';
 
 const StyledSpeedDial = styled(SpeedDial)((props) => ({
   position: 'absolute',
-  '.link': {
-    display: 'flex',
-    alignContent: 'center',
-  },
   '.MuiButtonBase-root': {
     backgroundColor: 'crimson',
   },
@@ -21,7 +17,7 @@ const StyledSpeedDial = styled(SpeedDial)((props) => ({
     right: '16px',
   },
   '&.MuiSpeedDial-directionDown, &.MuiSpeedDial-directionRight': {
-    top: '16px',
+    top: '26px',
     left: '16px',
   },
 }));
