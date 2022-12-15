@@ -59,8 +59,7 @@ const DialogWindow: FC<Props>  = observer((props) => {
               <ListItemText primary={name} secondary={new Date(delivery_date).toLocaleDateString()} />
             </ListItem>
           );
-        })}
-       
+        })}     
         <Divider />
       </List>
     </Dialog>
