@@ -1,5 +1,4 @@
 import React, { FC, useEffect, useState } from 'react';
-import { observer } from 'mobx-react-lite';
 import Button from '@mui/material/Button';
 import Grow from '@mui/material/Grow';
 import Typography from '@mui/material/Typography';
@@ -10,7 +9,7 @@ import CommodityBilTable from '../components/CommodityBilTable';
 
 import DialogWindow from '../components/DialogWindow';
 
-const ShoppingCheckpoint: FC = observer(() => {
+const ShoppingCheckpoint: FC = () => {
   const [open, setOpen] = useState(false);
   const [checked, setChecked] = useState(false);
   
@@ -42,6 +41,6 @@ const ShoppingCheckpoint: FC = observer(() => {
       </Grid>  
     </Grow>  
   );
-});
+};
 
 export default ShoppingCheckpoint;
