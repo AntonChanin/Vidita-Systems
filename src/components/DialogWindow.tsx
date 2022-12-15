@@ -25,7 +25,7 @@ type Props = {
 
 const DialogWindow: FC<Props>  = observer((props) => {
   const { open = false, onClose: handleClose, Transition } = props;
-  const { selectCommodity, setSelectCommodity } = DocumetArchive;
+  const { selectCommodity } = DocumetArchive;
 
   return (
     <Dialog
