@@ -1,4 +1,4 @@
-import { FC, MouseEventHandler } from 'react';
+import { FC, MouseEventHandler, useCallback } from 'react';
 import Dialog from '@mui/material/Dialog';
 import IconButton from '@mui/material/IconButton';
 import Button from '@mui/material/Button';
@@ -14,6 +14,9 @@ import { observer } from 'mobx-react-lite';
 
 import DocumetArchive from '../store';
 import { TransitionProps } from '@mui/material/transitions';
+import { PostServiceInstance } from '../store/services/post.service';
+import { GetServiceInstance } from '../store/services/get.service';
+import CommodityBilModel from '../model/document';
 
 type Props = {
   open?: boolean;
@@ -26,6 +29,21 @@ type Props = {
 const DialogWindow: FC<Props>  = observer((props) => {
   const { open = false, onClose: handleClose, Transition } = props;
   const { selectCommodity } = DocumetArchive;
+
+  const handleCancel = useCallback(async () => {
+    PostServiceInstance
+      .postArchive(
+        JSON.parse(
+          JSON.stringify({ answer: selectCommodity }
+          )
+        )
+      );
+    const featchData = async () => {
+      const data = await DocumetArchive.loadCommodity();
+      DocumetArchive.setCommodity(data);
+    }
+    featchData();
+  }, [selectCommodity]);
 
   return (
     <Dialog
@@ -47,7 +65,7 @@ const DialogWindow: FC<Props>  = observer((props) => {
           <Typography sx={{ ml: 2, flex: 1 }} variant="h6" component="div">
             Сancel selected commodity
           </Typography>
-          <Button autoFocus color="inherit" onClick={handleClose}>
+          <Button autoFocus color="inherit" onClick={handleCancel}>
             Сancel
           </Button>
         </Toolbar>

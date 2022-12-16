@@ -8,6 +8,8 @@ import UserTablePagination from './UserTablePagination';
 import commodityBilPreset from '../const/commodityBilPreset';
 import { Close } from '../const/icons';
 import { defaultMUITheme } from '../const/theme';
+import DocumetArchive from '../store';
+import { GetServiceInstance } from '../store/services/get.service';
 
 const rows: CommodityBilModel[] = [
   { id: '0', status: 'active', sum: 100, qty: 35, volume: 14, name: 'ham', delivery_date: new Date('10.10.2022').getTime(), currency: '' },
@@ -25,12 +27,17 @@ const CommodityBilTable: FC = () => {
   const [summaryVolium, setSummaryVolium] = useState(0);
   const [summaryQty, setSummaryQty] = useState(0);
   const [selectCommodity, setSelectCommodity] = useState<CommodityBilModel[]>([]);
+  const { commodity } = DocumetArchive;
 
   useLayoutEffect(() => {
-    rows.forEach((row) => {
-      setSummaryVolium(summaryVolium + row.volume);
-      setSummaryQty(summaryQty + row.qty);
-    });
+    const featchData = async () => {
+      const data = await DocumetArchive.loadCommodity();
+      DocumetArchive.setCommodity(data);
+      const { summaryOfQty, summaryOfVolium } = DocumetArchive.getSummary(DocumetArchive.commodity);
+      setSummaryVolium(summaryOfQty);
+      setSummaryQty(summaryOfVolium);
+    }
+    featchData();
   }, []);
 
   return (
@@ -38,7 +45,7 @@ const CommodityBilTable: FC = () => {
       <SelectCommodityObserver commodity={selectCommodity} />
       <MaterialTable
         onSelectionChange={(data) => { setSelectCommodity(data); }}
-        data={rows}
+        data={commodity}
         {...commodityBilPreset}
         actions={[
           {
