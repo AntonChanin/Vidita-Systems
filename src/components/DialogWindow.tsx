@@ -20,29 +20,32 @@ import CommodityBilModel from '../model/document';
 
 type Props = {
   open?: boolean;
-  onClose?: MouseEventHandler<HTMLButtonElement>;
+  onClose?(): void;
   Transition?: React.JSXElementConstructor<TransitionProps & {
     children: React.ReactElement<any, any>;
   }>
 };
 
 const DialogWindow: FC<Props>  = observer((props) => {
-  const { open = false, onClose: handleClose, Transition } = props;
-  const { selectCommodity } = DocumetArchive;
+  const { open = false, onClose: closeCallback, Transition } = props;
+  const { selectCommodity, setCommodity } = DocumetArchive;
+
+  const handleClose: MouseEventHandler<HTMLButtonElement> = (event) => {
+    event.preventDefault();
+    closeCallback?.();
+  }
 
   const handleCancel = useCallback(async () => {
-    PostServiceInstance
-      .postArchive(
-        JSON.parse(
-          JSON.stringify({ answer: selectCommodity }
-          )
-        )
-      );
     const featchData = async () => {
       const data = await DocumetArchive.loadCommodity();
       DocumetArchive.setCommodity(data);
     }
-    featchData();
+    PostServiceInstance
+      .postArchive(selectCommodity).then(() => {
+        featchData();
+        setCommodity([]);
+        closeCallback?.();
+      });
   }, [selectCommodity]);
 
   return (

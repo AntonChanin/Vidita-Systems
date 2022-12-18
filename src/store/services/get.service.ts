@@ -7,12 +7,12 @@ class GetService {
   }
 
   async getActive() {
-    const { data } = await axios.get(' http://localhost:5000/data/active.json');
+    const { data } = await axios.get(`${import.meta.env.VITE_API_ENDPOINT_1}`);
     return data.answer;
   }
 
   async getArchive() {
-    const { data } =  await axios.get('http://localhost:5000/data/archive.json');
+    const { data } =  await axios.get(`${import.meta.env.VITE_API_ENDPOINT_2}`);
     return data.answer;
   }
 }
