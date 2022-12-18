@@ -15,8 +15,6 @@ import { observer } from 'mobx-react-lite';
 import DocumetArchive from '../store';
 import { TransitionProps } from '@mui/material/transitions';
 import { PostServiceInstance } from '../store/services/post.service';
-import { GetServiceInstance } from '../store/services/get.service';
-import CommodityBilModel from '../model/document';
 
 type Props = {
   open?: boolean;
@@ -28,7 +26,7 @@ type Props = {
 
 const DialogWindow: FC<Props>  = observer((props) => {
   const { open = false, onClose: closeCallback, Transition } = props;
-  const { selectCommodity, setCommodity } = DocumetArchive;
+  const { selectCommodity, commodity } = DocumetArchive;
 
   const handleClose: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.preventDefault();
@@ -37,13 +35,15 @@ const DialogWindow: FC<Props>  = observer((props) => {
 
   const handleCancel = useCallback(async () => {
     const featchData = async () => {
-      const data = await DocumetArchive.loadCommodity();
-      DocumetArchive.setCommodity(data);
+      commodity.forEach(d => {
+        if(d.tableData) {
+          d.tableData.checked = false;
+        }
+      });
     }
     PostServiceInstance
       .postArchive(selectCommodity).then(() => {
         featchData();
-        setCommodity([]);
         closeCallback?.();
       });
   }, [selectCommodity]);

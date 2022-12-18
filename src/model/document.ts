@@ -7,6 +7,7 @@ type CommodityBilModel = {
   name: string;
   delivery_date: number;
   currency: string;
+  [key: string]: any;
 }
 
 export default CommodityBilModel;

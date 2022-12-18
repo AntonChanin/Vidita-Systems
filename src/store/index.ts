@@ -1,5 +1,6 @@
 import { action, makeObservable, observable } from 'mobx';
 import CommodityBilModel from '../model/document';
+import uuid from '../utils/uuid';
 import { GetServiceInstance } from './services/get.service';
 
 class DocumentArchive {
