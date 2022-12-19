@@ -1,2 +1,6 @@
 Backend: git+https://github.com/AntonChanin/vidita-backend.git
-Возможно Backend не работает как надо с POST
+
+###LAST VERSION
+
+Если последний день для исполнения 19 декабря смотрите последнюю актуальную версию с корректным сервером и парсингом ответа на
+ветке feature/first-day-patch в Backend и Frontend репозиториях.
