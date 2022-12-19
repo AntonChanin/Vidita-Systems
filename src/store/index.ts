@@ -1,7 +1,7 @@
 import { action, makeObservable, observable } from 'mobx';
 import CommodityBilModel from '../model/document';
-import uuid from '../utils/uuid';
 import { GetServiceInstance } from './services/get.service';
+import { PostServiceInstance } from './services/post.service';
 
 class DocumentArchive {
   commodity: CommodityBilModel[] = [];
@@ -14,6 +14,7 @@ class DocumentArchive {
       setCommodity: action.bound,
       setSelectCommodity: action.bound,
       loadCommodity: action.bound,
+      cancelCommodity: action.bound,
       getSummary: action.bound,
     })
   }
@@ -29,6 +30,22 @@ class DocumentArchive {
     const currentActive = active.filter(({ id }) => !archiveId.includes(id));
     this.setCommodity([...currentActive, ...archive]);
     return this.commodity;
+  }
+
+  async cancelCommodity(callback?: () => void) {
+    const featchData = async () => {
+      this.commodity.forEach(d => {
+        if(d.tableData) {
+          d.tableData.checked = false;
+        }
+      });
+    }
+    PostServiceInstance
+      .postArchive(this.selectCommodity).then(() => {
+        featchData();
+        this.loadCommodity();
+        callback?.();
+      });
   }
 
   getSummary(commodity: CommodityBilModel[]) {

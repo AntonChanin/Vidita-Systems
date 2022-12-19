@@ -14,7 +14,6 @@ import { observer } from 'mobx-react-lite';
 
 import DocumetArchive from '../store';
 import { TransitionProps } from '@mui/material/transitions';
-import { PostServiceInstance } from '../store/services/post.service';
 
 type Props = {
   open?: boolean;
@@ -26,7 +25,7 @@ type Props = {
 
 const DialogWindow: FC<Props>  = observer((props) => {
   const { open = false, onClose: closeCallback, Transition } = props;
-  const { selectCommodity, commodity } = DocumetArchive;
+  const { selectCommodity, cancelCommodity } = DocumetArchive;
 
   const handleClose: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.preventDefault();
@@ -34,18 +33,7 @@ const DialogWindow: FC<Props>  = observer((props) => {
   }
 
   const handleCancel = useCallback(async () => {
-    const featchData = async () => {
-      commodity.forEach(d => {
-        if(d.tableData) {
-          d.tableData.checked = false;
-        }
-      });
-    }
-    PostServiceInstance
-      .postArchive(selectCommodity).then(() => {
-        featchData();
-        closeCallback?.();
-      });
+    cancelCommodity(closeCallback)
   }, [selectCommodity]);
 
   return (
@@ -74,7 +62,7 @@ const DialogWindow: FC<Props>  = observer((props) => {
         </Toolbar>
       </AppBar>
       <List>
-        {selectCommodity.map(({ id: self, name, delivery_date }) => {
+        {selectCommodity.map(({ name, delivery_date }) => {
           return (
             <ListItem button>
               <ListItemText primary={name} secondary={new Date(delivery_date).toLocaleDateString()} />
