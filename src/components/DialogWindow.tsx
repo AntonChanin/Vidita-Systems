@@ -29,6 +29,7 @@ const DialogWindow: FC<Props>  = observer((props) => {
 
   const handleClose: MouseEventHandler<HTMLButtonElement> = (event) => {
     event.preventDefault();
+
     closeCallback?.();
   }
 

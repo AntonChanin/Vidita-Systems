@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react';
+import React, { FC, useCallback, useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import Grow from '@mui/material/Grow';
 import Grid from '@mui/material/Grid';
@@ -10,6 +10,8 @@ import DialogWindow from '../components/DialogWindow';
 const ShoppingCheckpoint: FC = () => {
   const [open, setOpen] = useState(false);
   const [checked, setChecked] = useState(false);
+  const [, updateState] = useState({});
+  const forceUpdate = useCallback(() => updateState({}), []);
   
   useEffect(() => {
     setChecked(!checked);
@@ -21,6 +23,7 @@ const ShoppingCheckpoint: FC = () => {
 
   const handleClose = () => {
     setOpen(false);
+    forceUpdate();
   };
 
   return (

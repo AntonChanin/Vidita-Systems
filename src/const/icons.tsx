@@ -1,5 +1,6 @@
 import React, { forwardRef } from 'react';
 import { Icons } from 'material-table';
+import ArchivatedIcon from '@mui/icons-material/Archive';
 import ArrowIcon from '@mui/icons-material/ArrowDropDown';
 import ArrowBackIcon from '@mui/icons-material/ChevronLeft';
 import ArrowForwardIcon from '@mui/icons-material/ChevronRight';
@@ -10,6 +11,7 @@ import FilterIcon from '@mui/icons-material/FilterAlt';
 import SearchIcon from '@mui/icons-material/Search';
 
 export const iconsComponents = {
+  Archive: ArchivatedIcon,
   Filter: FilterIcon,
   Search: SearchIcon,
   Close: CloseIcon,
@@ -20,7 +22,7 @@ export const iconsComponents = {
   LastPage: LastPageIcon,
 }
 
-export const { Filter, Search, Close, Arrow, FirstPage, PreviousPage, NextPage, LastPage } = iconsComponents;
+export const { Archive,  Filter, Search, Close, Arrow, FirstPage, PreviousPage, NextPage, LastPage } = iconsComponents;
 
 const forwardIcons: Icons = {
   Filter: forwardRef((props, ref) => <Filter ref={ref} {...props} />),

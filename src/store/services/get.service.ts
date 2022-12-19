@@ -8,12 +8,12 @@ class GetService {
 
   async getActive() {
     const { data } = await axios.get(`${import.meta.env.VITE_API_ENDPOINT_1}`);
-    return data.answer;
+    return typeof data === 'string' ? JSON.parse(data).answer : data.answer;
   }
 
   async getArchive() {
     const { data } =  await axios.get(`${import.meta.env.VITE_API_ENDPOINT_2}`);
-    return data.answer;
+    return typeof data === 'string' ? JSON.parse(data).answer : data.answer;
   }
 }
 
