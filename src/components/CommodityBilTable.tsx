@@ -55,7 +55,7 @@ const CommodityBilTable: FC = () => {
           }
         ]}
         components={{
-          Pagination: (props) => <UserTablePagination summaryVolium={summaryVolium} summaryQty={summaryQty} {...props} />,
+          Pagination: ({ classes, ...other }) => <UserTablePagination summaryVolium={summaryVolium} summaryQty={summaryQty} {...other} />,
         }}
       />
     </ThemeProvider>
