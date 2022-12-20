@@ -35,8 +35,14 @@ export const commodityBilStructure: Column<CommodityBilModel>[] = [
   {
     field: 'currency',
     title: 'Currency',
+    width: 70,
+    type: 'string',
+  },
+  {
+    field: '',
+    title: 'Total',
     width: 160,
-    type: 'currency',
+    type: 'numeric',
     render: (rowData) =>
       `${(rowData.sum * rowData.qty) ?? '_'}`,
   },
